@@ -1,3 +1,54 @@
+// student manager class
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class StudentManager {
+    ArrayList<Student> students = new ArrayList<>();
+    Scanner sc = new Scanner(System.in);
+
+    public void addStudent() {
+        System.out.print("Enter ID, Name, Age: ");
+        int id = sc.nextInt();
+        String name = sc.next();
+        int age = sc.nextInt();
+        students.add(new Student(id, name, age));
+    }
+
+    public void displayStudents() {
+        if (students.isEmpty()) {
+            System.out.println("No student records found.");
+        } else {
+            for (Student s : students) {
+                System.out.println(s);
+            }
+        }
+    }
+
+    public void updateStudent() {
+        System.out.print("Enter ID to update: ");
+        int id = sc.nextInt();
+        for (Student s : students) {
+            if (s.getId() == id) {
+                System.out.print("Enter new name and age: ");
+                String name = sc.next();
+                int age = sc.nextInt();
+                s.setName(name);
+                s.setAge(age);
+                System.out.println("Student updated.");
+                return;
+            }
+        }
+        System.out.println("Student not found.");
+    }
+
+    public void deleteStudent() {
+        System.out.print("Enter ID to delete: ");
+        int id = sc.nextInt();
+        students.removeIf(s -> s.getId() == id);
+        System.out.println("Deleted if existed.");
+    }
+}
+
 //student class
 public class Student {
     private int id;
